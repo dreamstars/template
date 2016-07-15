@@ -1,0 +1,12 @@
+$control.setTemplate("menu")
+<div class="container-fluid" style="">
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+            哎呀！出现问题鸟！可能原因：<br>
+            1.页面不存在，有错误哦，或者信息不存在哦！<br>
+            2.***正在在部署服务器中。。。稍后访问即可。<br>
+            </center>
+        </div>
+    </div>
+</div>

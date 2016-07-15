@@ -1,0 +1,347 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tuya</groupId>
+  <artifactId>webx</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <modules>
+    <module>webx-web</module>
+    <module>webx-service</module>
+    <module>webx-dal</module>
+  </modules>
+
+  <name>webx Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <java.version>1.6</java.version>
+    <java.encoding>UTF-8</java.encoding>
+    <webx-version>3.2.3</webx-version>
+    <spring-version>3.2.4.RELEASE</spring-version>
+    <jetty-version>8.1.13.v20130916</jetty-version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- ================================================= -->
+      <!-- Webx框架依赖 -->
+      <!-- ================================================= -->
+      <dependency>
+        <groupId>com.alibaba.citrus</groupId>
+        <artifactId>citrus-webx-all</artifactId>
+        <version>${webx-version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- ================================================= -->
+      <!-- Spring框架 -->
+      <!-- ================================================= -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjtools</artifactId>
+        <version>1.8.0</version>
+      </dependency>
+
+      <!-- ================================================= -->
+      <!-- 配置logback作为日志系统。 -->
+      <!-- ================================================= -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.5</version>
+      </dependency>
+      <!-- 确保commons-logging的jar包不被引入，否则将和jcl-over-slf4j冲突 -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>1.7.5</version>
+      </dependency>
+      <!-- 由于commons-logging和jcl-over-slf4j存在冲突,因此JCL(commons-logging)是必须被排除的 -->
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.3</version>
+        <!-- 将commons-logging设置成<scope>provided</scope>,这样在最终的依赖关系中,将不会包含commons-logging包。 -->
+        <scope>provided</scope>
+      </dependency>
+      <!-- slf4j的实现：logback用来取代log4j。更快、更强！ -->
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.0.13</version>
+        <!-- 将logback日志系统的依赖设定为<scope>runtime</scope>,因为应用程序永远不需要直接调用日志系统,
+             而是通过SLF4J或JCL这样的日志框架来调用它们。 -->
+        <scope>runtime</scope>
+      </dependency>
+      <!-- 用于排除slf4j-log4j12,确保没有jar包 直接或间接依赖了slf4j-log4j12。 -->
+      <dependency>
+        <groupId>yourGroupId</groupId>
+        <artifactId>yourArtifactId</artifactId>
+        <version>yourVersion</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity</artifactId>
+        <version>1.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>2.3.20</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>1.2.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.4</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- 内置服务,各模块之前要互相引用jar包需要指定各模块的版本,或者在子模块里指定也行 -->
+      <dependency>
+        <groupId>com.tuya</groupId>
+        <artifactId>service</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+
+
+  <build>
+    <finalName>webx</finalName>
+
+    <plugins>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <!-- Jetty7 - 此插件更名为jetty-maven-plugin -->
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.26</version>
+        <configuration>
+          <connectors>
+            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+              <port>8080</port>
+            </connector>
+          </connectors>
+          <scanIntervalSeconds>5</scanIntervalSeconds>
+          <reload>automatic</reload>
+        </configuration>
+      </plugin>
+      <!-- Jetty7 - 此插件更名为jetty-maven-plugin(不知道为什么Jetty7不能启动...Jetty6可以启动) ; Jetty6名为maven-jetty-plugin -->
+      <!--<plugin>-->
+        <!--<groupId>org.mortbay.jetty</groupId>-->
+        <!--<artifactId>jetty-maven-plugin</artifactId>-->
+        <!--<version>${jetty-version}</version>-->
+        <!--<configuration>-->
+          <!--<connectors>-->
+            <!--<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">-->
+              <!--<port>8080</port>-->
+            <!--</connector>-->
+            <!--<connector implementation="org.mortbay.jetty.ssl.SslSelectChannelConnector">-->
+              <!--<port>8443</port>-->
+              <!--<keystore>src/test/resources/server.keystore</keystore>-->
+              <!--<keyPassword>123456</keyPassword>-->
+              <!--<password>123456</password>-->
+            <!--</connector>-->
+          <!--</connectors>-->
+        <!--</configuration>-->
+        <!--<dependencies>-->
+          <!--<dependency>-->
+            <!--<groupId>org.mortbay.jetty</groupId>-->
+            <!--<artifactId>jetty-ssl</artifactId>-->
+            <!--<version>7.0.0.pre5</version>-->
+          <!--</dependency>-->
+        <!--</dependencies>-->
+      <!--</plugin>-->
+
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <!-- 指定代码要使用什么样的jdk版本编译以及代码的编码 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>${java.version}</source><!-- 源代码使用的开发版本 -->
+            <target>${java.version}</target><!-- 需要生成的目标class文件的编译版本 -->
+            <!-- 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行 (对于低版本
+                 目标jdk，源代码中需要没有使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
+            <encoding>${java.encoding}</encoding>
+          </configuration>
+        </plugin>
+        <!-- surefire 插件用来在maven构建生命周期的test phase执行一个应用的单元测试。可以生成txt和xml的测试结果 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <includes>
+              <include>**/*Tests.java</include>
+            </includes>
+            <argLine>-Xmx256m</argLine>
+          </configuration>
+        </plugin>
+        <!-- 源码打包插件 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <phase>package</phase><!-- 配置在什么阶段打包源文件 -->
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- Assembly插件是把一组文件、目录、依赖元素组装成一个归档文件,构建一个完整的发布包 -->
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+            <finalName>backend</finalName>
+            <descriptors>
+              <descriptor>assembly.xml</descriptor>
+            </descriptors>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
+</project>

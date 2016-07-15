@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback Configuration.  -->
+<configuration debug="false">
+<!-- 用于区分不同应用程序的日志 -->
+<contextName>webxLog</contextName>
+<property file="${user.home}/conf/webxlog.properties" />
+
+<!-- appender是负责写日志的组件.name指定appender名称，class指定appender的全限定名,即使用哪种方式记录日志
+     RollingFileAppender滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。-->
+<appender name="InfoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 过滤器,返回DENY，日志将立即被抛弃不再经过其他过滤器；返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；
+         返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。
+          LevelFilter： 级别过滤器，根据日志级别进行过滤。如果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志。-->
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>INFO</level><!-- 设置过滤级别 -->
+        <onMatch>ACCEPT</onMatch><!-- 用于配置符合过滤条件的操作 -->
+        <onMismatch>DENY</onMismatch><!-- 用于配置不符合过滤条件的操作 -->
+    </filter>
+    <!--  -->
+    <file>${webx.log.path}/info.log</file>
+    <!-- rollingPolicy用于指定滚动策略
+         TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动。-->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- FileNamePattern必要节点，包含文件名及“%d”转换符,“%d”可以包含一个java.text.SimpleDateFormat指定的时间格式，
+             如%d{yyyy-MM-dd},表示每天生成一个日志文件,%d{yyyy-MM}表示每个月生成一个日志文件 -->
+        <FileNamePattern>${webx.log.path}/info_%d{yyyy-MM-dd}.log</FileNamePattern>
+        <!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。这里表示每个月保存30天的日志文件 -->
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <!-- encoder负责两件事，一是把日志信息转换成字节数组，二是把字节数组写入到输出流。 -->
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <!-- pattern设置日志的输入格式 -->
+        <pattern>
+            %d{yyyy-MM-dd HH:mm:ss.SSS}, %p, %c, %F, %L, %M %m%n
+        </pattern>
+    </encoder>
+</appender>
+    <!--  -->
+<appender name="WarnFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>WARN</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+    <file>${webx.log.path}/warn.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <FileNamePattern>${webx.log.path}/warn_%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <pattern>
+            %d{yyyy-MM-dd HH:mm:ss.SSS}, %p, %c, %F, %L, %M %m%n
+        </pattern>
+    </encoder>
+</appender>
+
+<appender name="ErrorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>ERROR</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+    <file>${webx.log.path}/error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <FileNamePattern>${webx.log.path}/error_%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <pattern>
+            %d{yyyy-MM-dd HH:mm:ss.SSS}, %p, %c, %F, %L, %M %m%n
+        </pattern>
+    </encoder>
+</appender>
+
+
+<root>
+    <level value="INFO" />
+    <appender-ref ref="InfoFile" />
+    <appender-ref ref="WarnFile" />
+    <appender-ref ref="ErrorFile" />
+</root>
+</configuration>

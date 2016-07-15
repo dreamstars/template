@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webx-web:war">
+    <output-path>$PROJECT_DIR$/webx-web/target</output-path>
+    <root id="archive" name="webx.war">
+      <element id="artifact" artifact-name="webx-web:war exploded" />
+    </root>
+  </artifact>
+</component>

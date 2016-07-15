@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns:uri-interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
+             xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+                 http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <!-- 该文件是给路径起别名,不是必需的 -->
+    <services:uris>
+
+        <uris:servlet-uri id="Server" requestAware="true">
+            <servletPath>/</servletPath>
+        </uris:servlet-uri>
+
+        <!-- home -->
+        <uris:turbine-uri id="homeModule" exposed="true" extends="Server">
+            <componentPath>/</componentPath>
+        </uris:turbine-uri>
+        <!-- vm模板可以根据id获取turbine-content-uri的componentPath的值 -->
+        <uris:turbine-content-uri id="homeContent" exposed="true" extends="homeModule">
+            <componentPath>/home</componentPath>
+        </uris:turbine-content-uri>
+        <uris:turbine-uri id="homeLink" exposed="true" extends="homeModule">
+            <target>index</target>
+        </uris:turbine-uri>
+
+        <!-- 登录 -->
+        <uris:turbine-uri id="loginModule" exposed="true" extends="Server">
+            <componentPath>/login</componentPath>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="loginLink" exposed="true" extends="loginModule">
+            <target>login</target>
+        </uris:turbine-uri>
+
+
+    </services:uris>
+
+</beans:beans>

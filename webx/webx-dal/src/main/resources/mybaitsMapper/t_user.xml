@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tuya.backend.dal.dao.app.client.impl.UserDAO">
+
+	<resultMap type="com.tuya.webx.dal.entity.UserDO" id="UserDOResult">
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userComment" column="user_comment" />
+		<result property="password" column="password" />
+		<result property="rand" column="rand" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="gmtModified" column="gmt_modified" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<sql id="baseColumn">
+	    <![CDATA[
+        user_id,user_name,user_comment,password,rand,gmt_create,gmt_modified,status
+	    ]]>
+	</sql>
+
+	<sql id="set" >
+		<if test="userId != null" >
+			user_id = #{userId},
+		</if>
+		<if test="userName != null" >
+			user_name = #{userName},
+		</if>
+		<if test="userComment != null" >
+			user_comment = #{userComment},
+		</if>
+		<if test="password != null" >
+			password = #{password},
+		</if>
+		<if test="rand != null" >
+			rand = #{rand},
+		</if>
+		<if test="gmtCreate != null" >
+			gmt_create = #{gmtCreate,jdbcType=INTEGER},
+		</if>
+		<if test="gmtModified != null" >
+			gmt_modified = #{gmtModified,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<sql id="query-condition" >
+		status="1"
+		<if test="userId != null" >
+			AND  user_id = #{userId}
+		</if>
+		<if test="userName != null" >
+			AND  user_name = #{userName}
+		</if>
+		<if test="userComment != null" >
+			AND  user_comment LIKE '%${userComment}%'
+		</if>
+		<if test="orderBy != null" >
+			order by ${orderBy}
+		</if>
+	</sql>
+
+
+	<sql id="page-limit">
+		<if test="limit!=null and offset !=null">
+			limit #{offset},#{limit}
+		</if>
+	</sql>
+
+	<select id="getByUserId" parameterType="Integer" resultMap="UserDOResult">
+		SELECT
+		<include refid="baseColumn"/>
+		FROM `backend_user` where user_id = #{userId} and status="1"
+	</select>
+
+	<select id="getByUsername" parameterType="String" resultMap="UserDOResult">
+		SELECT
+		<include refid="baseColumn"/>
+		FROM `backend_user` where user_name = #{username} and status="1"
+	</select>
+
+	<insert id="addUser" parameterType="com.tuya.backend.dal.dao.app.domain.UserDO" >
+		insert backend_user
+		<set>
+			<include refid="set"/>
+		</set>
+		<selectKey keyProperty="userId" resultType="Integer">
+			SELECT
+			LAST_INSERT_ID() AS value
+		</selectKey>
+	</insert>
+
+	<update id="deleteUserByUserId" parameterType="java.lang.Integer" >
+		update backend_user
+		set status="0"
+		where user_id = #{userId}
+	</update>
+
+	<update id="updateUserByUserId" parameterType="com.tuya.backend.dal.dao.app.domain.UserDO" >
+		update backend_user
+		<set>
+			<include refid="set"/>
+		</set>
+		where user_id = #{userId}
+	</update>
+
+</mapper>

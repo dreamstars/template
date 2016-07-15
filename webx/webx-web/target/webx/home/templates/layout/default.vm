@@ -1,0 +1,11 @@
+$control.setTemplate("home:header")##引不进来
+
+<body>
+
+    ##占位符,指定这个模板本身screen要引入的位置,即引入index.vm或failed.vm(依据target引入)模板
+    $screen_placeholder
+
+    $control.setTemplate("home:bottom")
+
+</body>
+</html>

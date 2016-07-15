@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/webx.iml" filepath="$PROJECT_DIR$/webx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webx-dal/webx-dal.iml" filepath="$PROJECT_DIR$/webx-dal/webx-dal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webx-service/webx-service.iml" filepath="$PROJECT_DIR$/webx-service/webx-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webx-web/webx-web.iml" filepath="$PROJECT_DIR$/webx-web/webx-web.iml" />
+    </modules>
+  </component>
+</project>

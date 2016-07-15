@@ -1,0 +1,2 @@
+$control.setParameter("isLogin", $isLogin).setParameter("userName", $userName).setParameter("menuTree", $menuTree).setTemplate("home:menu")
+

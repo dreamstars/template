@@ -1,0 +1,5 @@
+com/tuya/webx/dal/dao/TUserDAO.class
+com/tuya/webx/dal/dao/impl/TUserDAOImpl.class
+com/tuya/webx/dal/base/BaseDO.class
+com/tuya/webx/dal/base/BaseDAO.class
+com/tuya/webx/dal/entity/TUserDO.class

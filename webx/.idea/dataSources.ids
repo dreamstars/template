@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - test@localhost" uuid="d570b11f-d2c9-4fd6-904f-c36ede31062e">
+    <database-info product="MySQL" version="5.7.13" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
+      <schema id="1" name="test"/>
+      <table id="2" parent="1" name="t_user"/>
+      <column id="3" parent="2" name="user_id">
+        <comment>user_id</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="4" parent="2" name="user_name">
+        <comment>用户名</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="5" parent="2" name="user_comment">
+        <comment>用户名注释</comment>
+        <data-type>varchar(200)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="6" parent="2" name="password">
+        <comment>密码</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="7" parent="2" name="rand">
+        <comment>随机数</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(10)</data-type>
+      </column>
+      <column id="8" parent="2" name="gmt_create">
+        <comment>添加时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="9" parent="2" name="gmt_modified">
+        <comment>更新时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="10" parent="2" name="status">
+        <comment>0表示数据无效，1表示数据有效</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <index id="11" parent="2" name="idx_username">
+        <columns>user_name</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="12" parent="2" name="idx_username">
+        <columns>user_name</columns>
+        <underlying-index>idx_username</underlying-index>
+      </key>
+      <key id="13" parent="2" name="PRIMARY">
+        <columns>user_id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>

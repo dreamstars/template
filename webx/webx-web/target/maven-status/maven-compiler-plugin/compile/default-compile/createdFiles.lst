@@ -1,0 +1,5 @@
+com/tuya/webx/web/base/common/ScreenResult.class
+com/tuya/webx/web/base/common/BaseScreen.class
+com/tuya/webx/web/login/module/screen/Index.class
+com/tuya/webx/web/base/common/BaseAction.class
+com/tuya/webx/web/login/module/screen/Login.class

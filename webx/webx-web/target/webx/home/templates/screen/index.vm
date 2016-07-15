@@ -1,0 +1,11 @@
+##$control.setTemplate()是webx层面提供的一种control引用方式,可以在一个模板中引用另一个模板,
+##但若需要共享参数时需要通过$control.setParameter(key, value)传入
+$control.setTemplate("menu")
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron">
+            <h1 style="color:#646464;">Tuya管理后台</h1>
+            <p  style="float:right;color:#999;font-size:12px;">有问题请联系***</p>
+        </div>
+    </div>
+</div>

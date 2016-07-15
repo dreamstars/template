@@ -1,0 +1,10 @@
+$control.setTemplate("home:header")
+
+<body>
+    ##占位符,指定这个模板本身screen要引入的位置,即引入login.vm模板
+    $screen_placeholder
+
+##    $control.setTemplate("home:bottom")
+
+</body>
+</html>
